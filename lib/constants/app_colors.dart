@@ -12,4 +12,7 @@ class AppColors {
   static const Color greenButtonColor = Color(0xFF244335);
   //takeimagecard
   //static const Color greenButtonColor = Color(0xFF244335);
+
+  //camera
+  static const Color whiteNintyPercentTransparent = Color(0xB3FFFFFF);
 }

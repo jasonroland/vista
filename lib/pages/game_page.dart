@@ -19,7 +19,7 @@ class GamePage extends ConsumerWidget {
     return PopScope(
         canPop: false,
         child: CupertinoPageScaffold(
-            navigationBar: const CupertinoNavigationBar(
+            navigationBar: CupertinoNavigationBar(
               automaticallyImplyLeading: false,
               trailing: Align(
                 widthFactor: 1.0,
@@ -29,11 +29,17 @@ class GamePage extends ConsumerWidget {
                   color: AppColors.whiteTextColor,
                 ),
               ),
-              middle: Text("1/10"),
+              middle: Text(
+                "1/10",
+                style: TextStyle(color: AppColors.whiteTextColor),
+              ),
               leading: Align(
                 widthFactor: 1.0,
                 alignment: Alignment.center,
-                child: Text('00:49'),
+                child: Text(
+                  '00:49',
+                  style: TextStyle(color: AppColors.whiteTextColor),
+                ),
               ),
             ),
             child: Stack(
@@ -94,6 +100,16 @@ class GamePage extends ConsumerWidget {
                     },
                   ),
                 ),
+                //here we are watching if the camera view is up and if yes we add a opacity over the other widgets to show focus
+                if (ref.watch(gameBottomViewController.notifier).state ==
+                    GameViewBottomViewEnum.camera) ...[
+                  Positioned.fill(
+                    child: Container(
+                      color: Colors.black
+                          .withOpacity(0.5), // Adjust opacity as needed
+                    ),
+                  ),
+                ],
                 Positioned(
                     left: 0,
                     right: 0,

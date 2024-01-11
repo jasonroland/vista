@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vista/constants/app_colors.dart';
@@ -105,54 +106,63 @@ class GameBottomView extends ConsumerWidget {
 
   Widget _buildExplainView(BuildContext context, WidgetRef ref) {
     //explain view
-    return Container(
-      color: CupertinoTheme.of(context).barBackgroundColor,
-      width: double.infinity,
-      child: Padding(
-        padding: const EdgeInsets.all(28),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Uncover Personality",
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: AppColors.whiteTextColor,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    SizedBox(
-                      width: 250,
-                      child: Text(
-                        "Show a window into your life by\nanswering prompts with an\nhonest image",
+    return SlideTransition(
+      position: Tween<Offset>(
+        begin: Offset(0.0, 1.0), // Start at the bottom
+        end: Offset.zero, // End at its final position
+      ).animate(CurvedAnimation(
+        curve: Curves.easeInOut,
+        parent: ModalRoute.of(context)!.animation!,
+      )),
+      child: Container(
+        color: CupertinoTheme.of(context).barBackgroundColor,
+        width: double.infinity,
+        child: Padding(
+          padding: const EdgeInsets.all(28),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Uncover Personality",
                         style: TextStyle(
-                            fontSize: 16, color: AppColors.greyTextColor),
+                            fontSize: 20,
+                            color: AppColors.whiteTextColor,
+                            fontWeight: FontWeight.w500),
                       ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 40),
-            CupertinoButton.filled(
-                child: Text(
-                  "Lets go!",
-                  style: TextStyle(
-                    color: AppColors.whiteTextColor,
+                      SizedBox(
+                        height: 8,
+                      ),
+                      SizedBox(
+                        width: 250,
+                        child: Text(
+                          "Show a window into your life by\nanswering prompts with an\nhonest image",
+                          style: TextStyle(
+                              fontSize: 16, color: AppColors.greyTextColor),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                onPressed: () {
-                  HapticFeedback.mediumImpact();
-                  ref.read(gameBottomViewController.notifier).state =
-                      GameViewBottomViewEnum.camera;
-                }),
-          ],
+                ],
+              ),
+              const SizedBox(height: 40),
+              CupertinoButton.filled(
+                  child: Text(
+                    "Lets go!",
+                    style: TextStyle(
+                      color: AppColors.whiteTextColor,
+                    ),
+                  ),
+                  onPressed: () {
+                    HapticFeedback.mediumImpact();
+                    ref.read(gameBottomViewController.notifier).state =
+                        GameViewBottomViewEnum.camera;
+                  }),
+            ],
+          ),
         ),
       ),
     );
@@ -160,84 +170,95 @@ class GameBottomView extends ConsumerWidget {
 
   Widget _buildCameraView(BuildContext context, WidgetRef ref) {
     //camera view
-    return Container(
-        //     .width, //MediaQuery.sizeOf(context).height, this is interesting as the image has to be a square so if there isnt enough hight image will start to show some "padding"
-        height:
-            508, //TODO: fix this layout, right now relying on manual hight which will cause issues in different screensizes because the preview is dynamic based on exact mediaquery size
-        color: CupertinoTheme.of(context).barBackgroundColor,
-        width: MediaQuery.of(context).size.width,
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                SizedBox(height: 16),
-                Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 16,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Prompt:",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: AppColors.greyTextColor,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          SizedBox(
-                            width: (MediaQuery.of(context).size.width - 56),
-                            child: Text(
-                              "Show your most recent vacation",
+    return SlideTransition(
+      position: Tween<Offset>(
+        begin: Offset(0.0, 1.0), // Start at the bottom
+        end: Offset.zero, // End at its final position
+      ).animate(CurvedAnimation(
+        curve: Curves.easeInOut,
+        parent: ModalRoute.of(context)!.animation!,
+      )),
+      child: Container(
+          color: CupertinoTheme.of(context).barBackgroundColor,
+          child: Column(
+            children: [
+              Column(
+                children: [
+                  SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 16,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Prompt:",
                               style: TextStyle(
-                                fontSize: 20,
-                                color: AppColors.whiteTextColor,
+                                fontSize: 16,
+                                color: AppColors.greyTextColor,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                          ),
-                        ],
+                            const SizedBox(height: 8),
+                            SizedBox(
+                              width: (MediaQuery.of(context).size.width - 56),
+                              child: Text(
+                                "Show your most recent vacation",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: AppColors.whiteTextColor,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Spacer(),
-                    CupertinoButton(
-                        child: Text("Library",
-                            style: TextStyle(color: AppColors.greyTextColor)),
-                        onPressed: () {}),
-                  ],
-                ),
-              ],
-            ),
-            Consumer(
-              builder: (context, ref, child) {
-                //checking if an image has been captured
-                if (ref.watch(isImageCapturedProvider)) {
-                  print("Image captured so we showing this view");
-                  return Stack(
+                    ],
+                  ),
+                  Row(
                     children: [
-                      Positioned.fill(
-                        child: Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Container(
-                            child: AspectRatio(
-                              aspectRatio: 1 / 1,
-                              child: ClipRect(
-                                child: Transform.scale(
-                                  scale: 1 / 1,
-                                  child: Center(
-                                    child: Image(
-                                      fit: BoxFit.cover,
-                                      width: MediaQuery.of(context).size.width,
-                                      height: MediaQuery.of(context).size.width,
-                                      image: FileImage(File(imagePath)),
+                      Spacer(),
+                      Icon(CupertinoIcons.photo_fill_on_rectangle_fill,
+                          color: AppColors.greyTextColor),
+                      CupertinoButton(
+                          padding: EdgeInsets.only(
+                              left: 8, right: 16, top: 16, bottom: 16),
+                          child: Text("Photo Library",
+                              style: TextStyle(color: AppColors.greyTextColor)),
+                          onPressed: () {}),
+                    ],
+                  ),
+                ],
+              ),
+              Consumer(
+                builder: (context, ref, child) {
+                  //checking if an image has been captured
+                  if (ref.watch(isImageCapturedProvider)) {
+                    print("Image captured so we showing this view");
+                    return Stack(
+                      children: [
+                        Positioned(
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Container(
+                              child: AspectRatio(
+                                aspectRatio: 1 / 1,
+                                child: ClipRect(
+                                  child: Transform.scale(
+                                    scale: 1 / 1,
+                                    child: Center(
+                                      child: Image(
+                                        fit: BoxFit.cover,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height:
+                                            MediaQuery.of(context).size.width,
+                                        image: FileImage(File(imagePath)),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -245,47 +266,55 @@ class GameBottomView extends ConsumerWidget {
                             ),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        bottom: 50,
-                        left: 0,
-                        right: 0,
-                        child: Align(
-                          alignment: Alignment.bottomCenter,
-                          child: CupertinoButton.filled(
-                            child: Text(
-                              "Send",
-                              style: TextStyle(color: AppColors.whiteTextColor),
+                        Positioned(
+                          bottom: 50,
+                          left: 0,
+                          right: 0,
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: IconButton(
+                              padding: EdgeInsets.all(16),
+                              icon: Icon(
+                                CupertinoIcons.arrow_up,
+                                color: AppColors.whiteTextColor,
+                              ),
+                              iconSize: 36,
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color?>(
+                                        AppColors.blueButtonColor),
+                              ),
+                              onPressed: () {
+                                HapticFeedback.mediumImpact();
+                                ref
+                                    .read(gameBottomViewController.notifier)
+                                    .state = GameViewBottomViewEnum.waiting;
+                                ref
+                                    .read(isImageCapturedProvider.notifier)
+                                    .state = false;
+                                //over here we are using this key to dispose the controller because since we are displaying and undisplaying it without using a navigator the dispose never gets called unless we do it
+                                takePictureScreenKey.currentState
+                                    ?.disposeController();
+                              },
                             ),
-                            onPressed: () {
-                              HapticFeedback.mediumImpact();
-                              ref
-                                  .read(gameBottomViewController.notifier)
-                                  .state = GameViewBottomViewEnum.waiting;
-                              ref.read(isImageCapturedProvider.notifier).state =
-                                  false;
-                              //over here we are using this key to dispose the controller because since we are displaying and undisplaying it without using a navigator the dispose never gets called unless we do it
-                              takePictureScreenKey.currentState
-                                  ?.disposeController();
-                            },
                           ),
                         ),
+                      ],
+                    );
+                  } else {
+                    // Create a new instance of TakePictureScreen within the Consumer
+                    print("yeah we here but weird shii");
+                    return Align(
+                      alignment: Alignment.bottomCenter,
+                      child: TakePictureScreen(
+                        key: takePictureScreenKey,
                       ),
-                    ],
-                  );
-                } else {
-                  // Create a new instance of TakePictureScreen within the Consumer
-                  print("yeah we here but weird shii");
-                  return Align(
-                    alignment: Alignment.bottomCenter,
-                    child: TakePictureScreen(
-                      key: takePictureScreenKey,
-                    ),
-                  );
-                }
-              },
-            ),
-          ],
-        ));
+                    );
+                  }
+                },
+              ),
+            ],
+          )),
+    );
   }
 }
