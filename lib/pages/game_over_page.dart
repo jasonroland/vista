@@ -10,10 +10,6 @@ class GameOverPage extends StatelessWidget {
     return PopScope(
       canPop: false,
       child: CupertinoPageScaffold(
-          // navigationBar: const CupertinoNavigationBar(
-          //   middle: Text(""),
-          //   automaticallyImplyLeading: false,
-          // ),
           child: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(top: 40, left: 20, right: 20),
@@ -69,25 +65,43 @@ class GameOverPage extends StatelessWidget {
                 ),
               ),
               Spacer(),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+              Padding(
+                padding: EdgeInsets.only(left: 20),
+                child: Row(children: [
                   Text(
-                    "Would you like to get to know\nJules better?",
+                    "Get to know Jules better", //Would you like to
                     style: TextStyle(
+                        fontWeight: FontWeight.w700,
                         fontSize: 20,
-                        color: AppColors.whiteTextColor,
-                        fontWeight: FontWeight.w500),
+                        color: AppColors.whiteTextColor),
+                    //textAlign: TextAlign.center,
                   ),
-                  Spacer()
-                ],
+                  Spacer(),
+                ]),
               ),
               SizedBox(
-                height: 32,
+                height: 8,
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 20),
+                child: Row(children: [
+                  Text(
+                    "Begin a conversation by sharing\nyour instagram",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                      color: AppColors.greyTextColor,
+                    ),
+                  ),
+                  Spacer(),
+                ]),
+              ),
+              SizedBox(
+                height: 16,
               ),
               CupertinoButton.filled(
                   child: Text(
-                    "Yes, share my Insta",
+                    "Share my Instagram",
                     style: TextStyle(color: AppColors.whiteTextColor),
                   ),
                   onPressed: () {

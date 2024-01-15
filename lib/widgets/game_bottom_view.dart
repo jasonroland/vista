@@ -38,6 +38,7 @@ class GameBottomView extends ConsumerWidget {
   }
 
   Widget _buildWaitingView(BuildContext context, WidgetRef ref) {
+    //return Container();
     //waiting view
     return ClipRRect(
       child: BackdropFilter(
@@ -106,64 +107,65 @@ class GameBottomView extends ConsumerWidget {
 
   Widget _buildExplainView(BuildContext context, WidgetRef ref) {
     //explain view
-    return SlideTransition(
-      position: Tween<Offset>(
-        begin: Offset(0.0, 1.0), // Start at the bottom
-        end: Offset.zero, // End at its final position
-      ).animate(CurvedAnimation(
-        curve: Curves.easeInOut,
-        parent: ModalRoute.of(context)!.animation!,
-      )),
-      child: Container(
-        color: CupertinoTheme.of(context).barBackgroundColor,
-        width: double.infinity,
-        child: Padding(
-          padding: const EdgeInsets.all(28),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Uncover Personality",
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: AppColors.whiteTextColor,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      SizedBox(
-                        width: 250,
-                        child: Text(
-                          "Show a window into your life by\nanswering prompts with an\nhonest image",
-                          style: TextStyle(
-                              fontSize: 16, color: AppColors.greyTextColor),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(height: 40),
-              CupertinoButton.filled(
-                  child: Text(
-                    "Lets go!",
-                    style: TextStyle(
-                      color: AppColors.whiteTextColor,
+    // return SlideTransition(
+    //   position: Tween<Offset>(
+    //     begin: Offset(0.0, 1.0), // Start at the bottom
+    //     end: Offset.zero, // End at its final position
+    //   ).animate(CurvedAnimation(
+    //     curve: Curves.easeInOut,
+    //     parent: ModalRoute.of(context)!.animation!,
+    //   )),
+    //   child:
+    return Container(
+      color: CupertinoTheme.of(context).barBackgroundColor,
+      width: double.infinity,
+      child: Padding(
+        padding: const EdgeInsets.all(28),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Uncover Personality",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: AppColors.whiteTextColor,
+                          fontWeight: FontWeight.w500),
                     ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    SizedBox(
+                      width: 250,
+                      child: Text(
+                        "Show a window into your life by\nanswering prompts with an\nhonest image",
+                        style: TextStyle(
+                            fontSize: 16, color: AppColors.greyTextColor),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            const SizedBox(height: 40),
+            CupertinoButton.filled(
+                child: Text(
+                  "Lets go!",
+                  style: TextStyle(
+                    color: AppColors.whiteTextColor,
                   ),
-                  onPressed: () {
-                    HapticFeedback.mediumImpact();
-                    ref.read(gameBottomViewController.notifier).state =
-                        GameViewBottomViewEnum.camera;
-                  }),
-            ],
-          ),
+                ),
+                onPressed: () {
+                  HapticFeedback.mediumImpact();
+                  ref.read(gameBottomViewController.notifier).state =
+                      GameViewBottomViewEnum.camera;
+                }),
+          ],
         ),
+        // ),
       ),
     );
   }
@@ -266,6 +268,29 @@ class GameBottomView extends ConsumerWidget {
                             ),
                           ),
                         ),
+                        Positioned(
+                            right: 20,
+                            top: 20,
+                            child: IconButton(
+                              icon: Icon(
+                                CupertinoIcons.xmark,
+                                color: AppColors.blueButtonColor,
+                              ),
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color?>(
+                                        AppColors.whiteTextColor),
+                              ),
+                              onPressed: () {
+                                ref
+                                    .read(gameBottomViewController.notifier)
+                                    .state = GameViewBottomViewEnum.camera;
+
+                                ref
+                                    .read(isImageCapturedProvider.notifier)
+                                    .state = false;
+                              },
+                            )),
                         Positioned(
                           bottom: 50,
                           left: 0,

@@ -88,7 +88,7 @@ class HowItWorksPage extends ConsumerWidget {
                                     height: 2,
                                   ),
                                   Text(
-                                    "Share your story through 10 image-based prompts in a fun, game-like experience.",
+                                    "Share your story through 10 image-based prompts in a fun, live, game.",
                                     style: TextStyle(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 16,

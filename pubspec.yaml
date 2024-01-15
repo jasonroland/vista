@@ -40,6 +40,7 @@ dependencies:
   path_provider: 
   path:
   image_cropper:
+  loading_animation_widget:
 
 dev_dependencies:
   flutter_test:
