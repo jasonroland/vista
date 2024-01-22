@@ -4,7 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vista/constants/app_colors.dart';
 import 'package:vista/pages/game_page.dart';
-import 'package:vista/pages/get_to_know_page.dart';
+import 'package:vista/pages/instant_match_page.dart';
+import 'package:vista/pages/live_singles_page.dart';
 
 class HowItWorksPage extends ConsumerWidget {
   HowItWorksPage({super.key});
@@ -157,8 +158,8 @@ class HowItWorksPage extends ConsumerWidget {
                     leading: Icon(
                       CupertinoIcons.circle_fill,
                       color: ref.watch(availableToMatchSwitchProvider)
-                          ? AppColors.whiteTextColor
-                          : AppColors.darkGreyButtonBackgroundColor,
+                          ? CupertinoColors.activeGreen
+                          : AppColors.whiteTextColor,
                     ),
                     title: Text("Go Live"),
                     trailing: CupertinoSwitch(
@@ -177,30 +178,36 @@ class HowItWorksPage extends ConsumerWidget {
                   ),
                   if (ref.watch(availableToMatchSwitchProvider)) ...[
                     CupertinoListTile(
-                        leading: Icon(
+                        leading: const Icon(
                           CupertinoIcons.circle_fill,
                           color: AppColors.blueButtonColor,
                         ),
-                        title: Text("Live Singles"), //Find a match
+                        title: const Text("Live Singles"), //Find a match
                         trailing: const CupertinoListTileChevron(),
                         additionalInfo: Text("30"),
                         onTap: () => Navigator.of(context).push(
                             CupertinoPageRoute(
-                                builder: (context) => GetToKnowpage()))),
+                                builder: (context) =>
+                                    const LiveSinglesPage()))),
                     CupertinoListTile(
-                        leading: Icon(
+                        leading: const Icon(
                           CupertinoIcons.circle_fill,
-                          color: AppColors.greenButtonColor,
+                          color:
+                              AppColors.yellowButtonColor, //greenButtonColor,
                         ),
-                        title: Text("Instant Matches"),
+                        title: const Text("Instant Matches"),
                         trailing: const CupertinoListTileChevron(),
-                        additionalInfo: CircleAvatar(
+                        additionalInfo: const CircleAvatar(
+                          backgroundColor: AppColors.yellowButtonColor,
                           radius: 16,
-                          child: Text("2"),
+                          child: Text("2",
+                              style: TextStyle(
+                                  color: AppColors.darkGreyTextColor)),
                         ), //Text("2"),
                         onTap: () => Navigator.of(context).push(
                             CupertinoPageRoute(
-                                builder: (context) => GetToKnowpage()))),
+                                builder: (context) =>
+                                    const InstantMatchPage()))),
                   ]
                 ],
               ),

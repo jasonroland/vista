@@ -67,31 +67,37 @@ class GamePage extends ConsumerWidget {
                           if (index == items - 1) {
                             if (currentState ==
                                 GameViewBottomViewEnum.waiting) {
-                              return Center(
-                                child: Padding(
-                                    padding: EdgeInsets.only(top: 0),
-                                    child: CupertinoButton(
-                                        child: Text(
-                                          "Waiting for Jules",
-                                          style: TextStyle(
-                                              color: AppColors.greyTextColor),
-                                        ),
-                                        onPressed: () {
-                                          ref
-                                                  .read(gameBottomViewController
-                                                      .notifier)
-                                                  .state =
-                                              GameViewBottomViewEnum.gameOver;
-                                          print("gameoverr");
-                                        })),
+                              return Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CupertinoButton(
+                                      padding: const EdgeInsets.all(0),
+                                      child: const Text(
+                                        "Waiting for Jules",
+                                        style: TextStyle(
+                                            color: AppColors.greyTextColor),
+                                      ),
+                                      onPressed: () {
+                                        ref
+                                                .read(gameBottomViewController
+                                                    .notifier)
+                                                .state =
+                                            GameViewBottomViewEnum.gameOver;
+                                        print("gameoverr");
+                                      }),
+                                  LoadingAnimationWidget.flickr(
+                                      leftDotColor: AppColors.whiteTextColor,
+                                      rightDotColor: AppColors.blueButtonColor,
+                                      size: 40)
+                                ],
                               );
                             } else if (currentState ==
                                 GameViewBottomViewEnum.gameOver) {
                               return Center(
                                 child: Padding(
-                                    padding: EdgeInsets.only(top: 32),
+                                    padding: const EdgeInsets.only(top: 32),
                                     child: CupertinoButton.filled(
-                                        padding: EdgeInsets.all(16),
+                                        padding: const EdgeInsets.all(16),
                                         child: const Text(
                                           "Game over",
                                           style: TextStyle(
@@ -109,69 +115,6 @@ class GamePage extends ConsumerWidget {
                                           //         .state =
                                           //     GameViewBottomViewEnum.explain;
                                         })),
-                              );
-                            }
-                          }
-                          if (index == items - 2) {
-                            if (currentState ==
-                                GameViewBottomViewEnum.waiting) {
-                              return Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 20, right: 20, top: 20),
-                                child: Column(children: [
-                                  LoadingAnimationWidget.flickr(
-                                      leftDotColor: AppColors.whiteTextColor,
-                                      rightDotColor: AppColors.blueButtonColor,
-                                      size: 40),
-                                ]),
-                                // child: Row(
-                                //   crossAxisAlignment: CrossAxisAlignment.center,
-                                //   children: [
-                                //     // ClipRRect(
-                                //     //   borderRadius: BorderRadius.circular(8),
-                                //     //   child: Image.asset(
-                                //     //     'lib/assets/smallprofilephoto.png',
-                                //     //     width: 64,
-                                //     //     height: 64,
-                                //     //     fit: BoxFit.cover,
-                                //     //   ),
-                                //     // ),
-                                //     // const SizedBox(
-                                //     //   width: 20,
-                                //     // ),
-                                //     Column(
-                                //       crossAxisAlignment:
-                                //           CrossAxisAlignment.center,
-                                //       mainAxisAlignment:
-                                //           MainAxisAlignment.center,
-                                //       children: [
-                                //         LoadingAnimationWidget.waveDots(
-                                //             color: AppColors.whiteTextColor,
-                                //             size: 50),
-
-                                //         // const Text(
-                                //         //   "My most prized\npossession is",
-                                //         //   style: TextStyle(
-                                //         //       fontSize: 24,
-                                //         //       fontWeight: FontWeight.bold),
-                                //         // ),
-                                //         // const SizedBox(
-                                //         //   height: 16,
-                                //         // ),
-                                //         // ClipRRect(
-                                //         //   borderRadius:
-                                //         //       BorderRadius.circular(8),
-                                //         //   child: Image.asset(
-                                //         //     'lib/assets/coffee.png',
-                                //         //     width: 200,
-                                //         //     height: 200,
-                                //         //     fit: BoxFit.cover,
-                                //         //   ),
-                                //         // ),
-                                //       ],
-                                //     )
-                                //   ],
-                                // ),
                               );
                             }
                           }

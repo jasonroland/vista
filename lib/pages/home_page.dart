@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:vista/constants/app_colors.dart';
-import 'package:vista/pages/get_to_know_page.dart';
+import 'package:vista/pages/instant_match_page.dart';
 import 'package:vista/pages/how_it_works_page.dart';
 
 class HomePage extends StatelessWidget {

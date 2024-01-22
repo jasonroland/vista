@@ -15,4 +15,9 @@ class AppColors {
 
   //camera
   static const Color whiteNintyPercentTransparent = Color(0xB3FFFFFF);
+
+  //instant match
+  static const Color darkGreyTextColor = Color(0xFF393B3E);
+  static const Color blackTextColor = Color(0xFF262626);
+  static const Color yellowButtonColor = Color(0xFFFFC700);
 }
