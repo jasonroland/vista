@@ -20,9 +20,9 @@ A flutter based live game connecting users to share photos and get to know each 
      <td>Present day in purple and selected day in pink</td>
   </tr>
   <tr>
-    <td><img src="https://github.com/jasonroland/vista/assets/20714601/867fa601-1fe7-488e-8f8f-8bce702ff8ba" width=845.5 height=800></td>
-    <td><img src="https://github.com/jasonroland/vista/assets/20714601/17602e6a-a782-418e-af03-afb12c8609b1" width=845.5 height=800></td>
-    <td><img src="https://github.com/jasonroland/vista/assets/20714601/8ac9f1b2-29c7-46f6-b3cf-3b4956929cde" width=845.5 height=800></td>
+    <td><img src="https://github.com/jasonroland/vista/assets/20714601/867fa601-1fe7-488e-8f8f-8bce702ff8ba" width=845.5 height=700></td>
+    <td><img src="https://github.com/jasonroland/vista/assets/20714601/17602e6a-a782-418e-af03-afb12c8609b1" width=845.5 height=700></td>
+    <td><img src="https://github.com/jasonroland/vista/assets/20714601/8ac9f1b2-29c7-46f6-b3cf-3b4956929cde" width=845.5 height=700></td>
   </tr>
  </table>
 
