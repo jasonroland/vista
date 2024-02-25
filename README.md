@@ -23,9 +23,6 @@ A flutter based live game connecting users to share photos and get to know each 
     <td><img src="https://github.com/jasonroland/vista/assets/20714601/867fa601-1fe7-488e-8f8f-8bce702ff8ba" width=270 height=480></td>
     <td><img src="https://github.com/jasonroland/vista/assets/20714601/17602e6a-a782-418e-af03-afb12c8609b1" width=270 height=480></td>
     <td><img src="https://github.com/jasonroland/vista/assets/20714601/8ac9f1b2-29c7-46f6-b3cf-3b4956929cde" width=270 height=480></td>
-    <td><img src="https://github.com/jasonroland/vista/assets/20714601/80ceac5c-1c52-47f0-aba7-f8262d7adb20" width=270 height=480></td>
-    <td><img src="https://github.com/jasonroland/vista/assets/20714601/32d11590-46bb-4dd5-8709-340f31dac25f" width=270 height=480></td>
-    <td><img src="https://github.com/jasonroland/vista/assets/20714601/28bd4924-9753-439c-bf11-69cd56462ee7" width=270 height=480></td>
   </tr>
  </table>
 
