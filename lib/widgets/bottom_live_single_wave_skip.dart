@@ -10,14 +10,16 @@ class BottomLiveSingleWaveSkip extends StatelessWidget {
     return Container(
       width: maxWidth,
       decoration: const BoxDecoration(
-          color: AppColors.darkGreyButtonBackgroundColor,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(16), topRight: Radius.circular(16))),
+          color: AppColors.greyNotTransparent,
+          borderRadius: BorderRadius.all(Radius.circular(8))
+          //  borderRadius: BorderRadius.only(
+          //   topLeft: Radius.circular(16), topRight: Radius.circular(16))
+          ),
       child: Padding(
-        padding: EdgeInsets.only(left: 16, right: 16, bottom: 20),
+        padding: EdgeInsets.only(left: 16, right: 16, bottom: 8), //bottom20
         child: Column(
           children: [
-            SizedBox(height: 16),
+            SizedBox(height: 8),
             Transform.rotate(
               angle: 45 * 3.141592653589793238462 / 180,
               child: const Icon(
@@ -26,16 +28,19 @@ class BottomLiveSingleWaveSkip extends StatelessWidget {
                 size: 48,
               ),
             ),
-            const SizedBox(height: 16),
-            const Text(
-              "Show interest with a wave, this will put\nyour profile in their “Instant Matches”.",
-              style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                  overflow: TextOverflow.ellipsis,
-                  color: AppColors.whiteTextColor),
+            const SizedBox(height: 8),
+            SizedBox(
+              width: maxWidth,
+              child: const Text(
+                "Show interest with a wave, this will put your profile in their “Instant Matches”.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    color: AppColors.whiteTextColor),
+              ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -55,7 +60,7 @@ class BottomLiveSingleWaveSkip extends StatelessWidget {
                       onPressed: () {}),
                 ]),
                 Container(
-                  height: 24,
+                  height: 16,
                   width: 3,
                   decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(8)),

@@ -102,7 +102,7 @@ class GameOverPage extends StatelessWidget {
               CupertinoButton.filled(
                   child: Text(
                     "Share my Instagram",
-                    style: TextStyle(color: AppColors.whiteTextColor),
+                    style: TextStyle(), //maybe needs to be a bit bolder, idk
                   ),
                   onPressed: () {
                     Navigator.of(context).push(

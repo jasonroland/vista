@@ -69,11 +69,12 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
           // Handle error state
           print("no bueno");
           return Container(
-            width: screenWidth,
-            height: screenWidth,
-            color: Colors.transparent,
-            child: const Center(child: CircularProgressIndicator()),
-          );
+              width: screenWidth,
+              height: screenWidth,
+              color: Colors.transparent,
+              child: const Center(child: CupertinoActivityIndicator())
+              // CircularProgressIndicator()),
+              );
         }
 
         return Consumer(
@@ -108,7 +109,7 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
                         alignment: Alignment.bottomCenter,
                         child: IconButton(
                           padding: EdgeInsets.all(16),
-                          icon: Icon(
+                          icon: const Icon(
                             CupertinoIcons.camera,
                             color: AppColors.whiteNintyPercentTransparent,
                           ),

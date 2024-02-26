@@ -20,11 +20,11 @@ class InstantMatchPage extends StatelessWidget {
           builder: (BuildContext context, WidgetRef ref, Widget? child) {
             return SafeArea(
               child: Padding(
-                padding: EdgeInsets.only(top: 40, left: 20, right: 20),
+                padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
                 child: ListView.separated(
                     itemBuilder: (context, index) {
                       if (index == 0) {
-                        return Column(
+                        return const Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               //here should be container remove from top

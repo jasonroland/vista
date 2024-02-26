@@ -100,8 +100,8 @@ class GamePage extends ConsumerWidget {
                                         padding: const EdgeInsets.all(16),
                                         child: const Text(
                                           "Game over",
-                                          style: TextStyle(
-                                              color: AppColors.whiteTextColor),
+                                          style:
+                                              TextStyle(), //maybe needs to be a bit bolder, idk
                                         ),
                                         onPressed: () {
                                           HapticFeedback.mediumImpact();

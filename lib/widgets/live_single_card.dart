@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:vista/constants/app_colors.dart';
 
 class LiveSingleCard extends StatelessWidget {
@@ -30,7 +31,7 @@ class LiveSingleCard extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(8),
                     bottomRight: Radius.circular(8)),
-                color: AppColors.darkGreyButtonBackgroundColor),
+                color: AppColors.greyNotTransparent),
             child: const Padding(
               padding: EdgeInsets.all(16),
               child: Column(

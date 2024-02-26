@@ -40,6 +40,13 @@ dependencies:
   path_provider: 
   path:
   loading_animation_widget:
+  appinio_swiper:
+  action_slider:
+  firebase_core:
+  cloud_firestore:
+  firebase_auth:
+  
+
 
 
 dev_dependencies:

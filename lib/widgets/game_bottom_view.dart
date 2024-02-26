@@ -152,12 +152,7 @@ class GameBottomView extends ConsumerWidget {
             ),
             const SizedBox(height: 40),
             CupertinoButton.filled(
-                child: Text(
-                  "Lets go!",
-                  style: TextStyle(
-                    color: AppColors.whiteTextColor,
-                  ),
-                ),
+                child: Text("Lets go!"), //maybe needs to be a bit bolder, idk
                 onPressed: () {
                   HapticFeedback.mediumImpact();
                   ref.read(gameBottomViewController.notifier).state =

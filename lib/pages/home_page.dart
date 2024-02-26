@@ -2,8 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:vista/constants/app_colors.dart';
+import 'package:vista/pages/create_profile_page.dart';
+import 'package:vista/pages/edit_profile_page.dart';
 import 'package:vista/pages/instant_match_page.dart';
 import 'package:vista/pages/how_it_works_page.dart';
+import 'package:vista/pages/preference_page.dart';
+import 'package:vista/pages/welcome_page.dart';
+import 'package:vista/services/authentication_service.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -17,14 +22,20 @@ class HomePage extends StatelessWidget {
           CupertinoScrollbar(
             child: CustomScrollView(
               slivers: <Widget>[
-                const CupertinoSliverNavigationBar(
+                CupertinoSliverNavigationBar(
                     largeTitle: Text("My Profile"),
                     automaticallyImplyLeading: false,
-                    trailing: Icon(
-                      color: Colors.white,
-                      CupertinoIcons.settings_solid,
-                    ) //Text("Settings"),
-                    ),
+                    trailing: IconButton(
+                      padding: const EdgeInsets.all(0),
+                      icon: const Icon(
+                        CupertinoIcons.settings_solid,
+                        color: AppColors.whiteTextColor,
+                      ),
+                      onPressed: () {
+                        // Add your onPressed logic here
+                        _showActionSheet(context);
+                      },
+                    )),
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
@@ -54,7 +65,7 @@ class HomePage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Larry Burns",
+                                      "Larry Burns, 29",
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w500,
@@ -64,7 +75,7 @@ class HomePage extends StatelessWidget {
                                       height: 2,
                                     ),
                                     Text(
-                                      "29 Manager at EOS systems",
+                                      "Manager at EOS systems",
                                       style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
@@ -82,7 +93,7 @@ class HomePage extends StatelessWidget {
                               child: Padding(
                                 padding: EdgeInsets.only(left: 20),
                                 child: Text(
-                                  "Previous Interactions",
+                                  "Instant Message",
                                   style: TextStyle(
                                       fontSize: 24,
                                       fontWeight: FontWeight.w700),
@@ -195,8 +206,10 @@ class HomePage extends StatelessWidget {
                       Navigator.of(context).push(CupertinoPageRoute(
                           builder: (context) => HowItWorksPage()));
                     },
-                    color: AppColors.blueButtonColor,
+                    color: AppColors.blackTextColor,
                     shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                            color: AppColors.darkGreyTextColor, width: 1),
                         borderRadius: BorderRadius.circular(8)),
                     child: const Column(children: [
                       Padding(
@@ -220,7 +233,8 @@ class HomePage extends StatelessWidget {
                                 Text(
                                   "Go live. Match. Capture.", // Match. Capture. Go.
                                   style: TextStyle(
-                                      color: AppColors.greyTextColor,
+                                      color: AppColors
+                                          .whiteNintyPercentTransparent,
                                       fontSize: 16),
                                 )
                               ],
@@ -228,7 +242,7 @@ class HomePage extends StatelessWidget {
                             Spacer(),
                             Icon(
                               CupertinoIcons.bolt_fill,
-                              color: AppColors.whiteTextColor,
+                              color: AppColors.yellowButtonColor,
                             )
                           ],
                         ),
@@ -240,6 +254,123 @@ class HomePage extends StatelessWidget {
             ),
           )
         ]),
+      ),
+    );
+  }
+
+  // This shows a CupertinoModalPopup which hosts a CupertinoActionSheet.
+  void _showActionSheet(BuildContext context) {
+    showCupertinoModalPopup<void>(
+      context: context,
+      builder: (BuildContext context) => CupertinoActionSheet(
+        title: const Text('Settings'),
+        cancelButton: CupertinoActionSheetAction(
+          isDefaultAction: true,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text('Close'),
+        ),
+        //  message: const Text('Edit Profile'),
+        actions: <CupertinoActionSheetAction>[
+          // CupertinoActionSheetAction(
+          //   onPressed: () {
+          //     Navigator.pop(context);
+          //     Navigator.of(context).push(
+          //       CupertinoPageRoute(
+          //         fullscreenDialog:
+          //             false, //not sure which way i want the transitions
+          //         builder: (context) => CreateProfilePage(),
+          //       ),
+          //     );
+          //   },
+          //   child: const Text('Create Profile'),
+          // ),
+          CupertinoActionSheetAction(
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.of(context).push(
+                CupertinoPageRoute(
+                  fullscreenDialog:
+                      false, //not sure which way i want the transitions
+                  builder: (context) => EditProfilePage(),
+                ),
+              );
+            },
+            child: const Text('Edit Profile'),
+          ),
+          CupertinoActionSheetAction(
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.of(context).push(
+                CupertinoPageRoute(
+                  fullscreenDialog:
+                      false, //not sure which way i want the transitions
+                  builder: (context) => PreferencePage(),
+                ),
+              );
+            },
+            child: const Text('Preferences'),
+          ),
+          CupertinoActionSheetAction(
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.of(context).push(
+                CupertinoPageRoute(
+                  fullscreenDialog:
+                      false, //not sure which way i want the transitions
+                  builder: (context) => WelcomePage(),
+                ),
+              );
+            },
+            child: const Text('welcome'),
+          ),
+          CupertinoActionSheetAction(
+            onPressed: () {
+              AuthenticationService().signOutUser().then((_) {
+                // Sign out successful, handle any further logic here
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                  CupertinoPageRoute(
+                    fullscreenDialog:
+                        false, //not sure which way i want the transitions
+                    builder: (context) => WelcomePage(),
+                  ),
+                );
+              }).catchError((error) {
+                // Sign out failed, handle the error here
+                showCupertinoDialog(
+                  context: context,
+                  builder: (context) {
+                    return CupertinoAlertDialog(
+                      title: Text('Oops'),
+                      content: Text(error),
+                      actions: [
+                        CupertinoDialogAction(
+                          child: Text('OK'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              });
+            },
+            child: const Text('Sign Out'),
+          ),
+          CupertinoActionSheetAction(
+            /// This parameter indicates the action would perform
+            /// a destructive action such as delete or exit and turns
+            /// the action's text color to red.
+            isDestructiveAction: true,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text('Delete Account'),
+          ),
+        ],
       ),
     );
   }

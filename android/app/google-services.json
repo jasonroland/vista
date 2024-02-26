@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "122177373861",
+    "project_id": "live-imagesharing-matcher",
+    "storage_bucket": "live-imagesharing-matcher.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122177373861:android:4c5222c5e28dc56cabef4c",
+        "android_client_info": {
+          "package_name": "com.chilllabs.vista"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBz4qmeD0z4vkpyG5IOBOwmSPdsCkyzDR4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

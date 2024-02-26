@@ -20,4 +20,7 @@ class AppColors {
   static const Color darkGreyTextColor = Color(0xFF393B3E);
   static const Color blackTextColor = Color(0xFF262626);
   static const Color yellowButtonColor = Color(0xFFFFC700);
+
+  //swiper
+  static const Color greyNotTransparent = Color(0xFF323232);
 }
