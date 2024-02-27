@@ -1,13 +1,18 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:vista/constants/app_colors.dart';
-import 'package:vista/services/authentication_service.dart';
-import 'package:vista/widgets/phone_code_alert.dart';
+import 'package:vista/services/login_service.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
 //fix the column in this page
   @override
   Widget build(BuildContext context) {
+    TextEditingController countryCodeTextEditingController =
+        TextEditingController(text: "+1");
+    TextEditingController phoneNumberTextEditingController =
+        TextEditingController();
+
     return PopScope(
       // canPop: false,
       child: CupertinoPageScaffold(
@@ -53,7 +58,7 @@ class WelcomePage extends StatelessWidget {
                   SizedBox(height: 32),
                   Column(
                     children: [
-                      Row(children: [
+                      const Row(children: [
                         SizedBox(width: 4),
                         Text("Get Started"),
                         // Spacer()
@@ -61,61 +66,56 @@ class WelcomePage extends StatelessWidget {
                       SizedBox(height: 8),
                       CupertinoListSection.insetGrouped(
                         margin: EdgeInsets.all(0),
-                        children: const <CupertinoListTile>[
-                          CupertinoListTile(
-                            title: CupertinoTextField.borderless(
-                              keyboardType: TextInputType.phone,
-                              placeholder: "Enter Phone Number",
-                              // controller: TextEditingController(text: "+1"),
-                            ),
+                        children: [
+                          Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.all(8),
+                                child: SizedBox(
+                                  width: 60, // Specify the width here
+                                  child: CupertinoTextField.borderless(
+                                    keyboardType: TextInputType.phone,
+                                    placeholder: "+1",
+                                    controller:
+                                        countryCodeTextEditingController,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(RegExp(
+                                          r'[0-9+]')), // Allow digits and "+"
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: CupertinoTextField.borderless(
+                                  keyboardType: TextInputType.phone,
+                                  placeholder: "Enter Phone Number",
+                                  controller: phoneNumberTextEditingController,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                      // const SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       CupertinoButton(
-                          child: const Text(
-                            "Get Code",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          onPressed: () async {
-                            //using a Future.then() .catchError() pattern to manage errors and success
-                            // Call the authentication service to get the verification ID "step 1"
-                            AuthenticationService()
-                                .getVerificationID("+18888888888")
-                                .then((verificationID) {
-                              //success
-                              // Verification code received successfully
-                              print(
-                                  'Verification ID received: $verificationID');
-                              // Show a dialog to enter the verification code
-                              showCupertinoDialog(
-                                context: context,
-                                builder: (context) => PhoneCodeAlert(
-                                    verificationID: verificationID),
-                              );
-                            }).catchError((error) {
-                              // Error occurred during verification process
-                              print('Error during verification: $error');
-                              // Handle the error, by showing dialog to user
-                              showCupertinoDialog(
-                                context: context,
-                                builder: (context) {
-                                  return CupertinoAlertDialog(
-                                    title: Text('Oops'),
-                                    content: Text(error),
-                                    actions: [
-                                      CupertinoDialogAction(
-                                        child: Text('OK'),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            });
-                          }),
+                        child: const Text(
+                          "Get Code",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        onPressed: () async {
+                          final phoneNumberToSend =
+                              (countryCodeTextEditingController.text +
+                                  phoneNumberTextEditingController.text);
+
+                          LoginService loginCode = LoginService();
+                          // Call getStarted method with the BuildContext and phone number
+                          loginCode.startLoginProcess(
+                              context, phoneNumberToSend);
+                        },
+                      ),
                       const SizedBox(height: 16),
                     ],
                   )

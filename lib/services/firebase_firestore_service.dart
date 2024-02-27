@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:vista/models/profile.dart';
 
-class FirestoreService {
+class FirebaseFirestoreService {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -22,8 +22,7 @@ class FirestoreService {
     try {
       String uid = await generateUid(); // Generate uid
       // Get a reference to the user's document
-      DocumentReference userDocRef =
-          FirebaseFirestore.instance.collection('users').doc(uid);
+      DocumentReference userDocRef = firestore.collection('users').doc(uid);
 
       // Set the profile data as a field in the user's document
       await userDocRef.set(profile.toMap(), SetOptions(merge: true));

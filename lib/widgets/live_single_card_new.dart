@@ -1,4 +1,3 @@
-import 'package:action_slider/action_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vista/constants/app_colors.dart';

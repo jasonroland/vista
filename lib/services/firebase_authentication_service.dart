@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
 
 //service to authenticate users in firebase with phone number (only)
-class AuthenticationService {
+class FirebaseAuthenticationService {
   FirebaseAuth auth = FirebaseAuth.instance;
 
 //step 1, submit phone number which sends code to users phone and get verificationID from firebase
@@ -24,8 +24,14 @@ class AuthenticationService {
           // Handle auto retrieval timeout if needed
         },
       );
-    } catch (e) {
-      verificationCompleter.completeError(e.toString());
+    } catch (error) {
+      //Handle specific errors
+      if (error is FirebaseAuthException) {
+        //right now we are using error.message, this message is not particularly clear to users and might need to break it down and provide a clearer string to user with case/switch
+        verificationCompleter.completeError(error.message.toString());
+      } else {
+        verificationCompleter.completeError(error.toString());
+      }
     }
 
     return verificationCompleter.future;

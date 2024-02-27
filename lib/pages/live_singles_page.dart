@@ -1,9 +1,6 @@
-import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vista/widgets/bottom_live_single_wave_skip.dart';
-import 'package:vista/widgets/live_single_card.dart';
 import 'package:vista/widgets/live_single_card_new.dart';
 
 class LiveSinglesPage extends StatelessWidget {

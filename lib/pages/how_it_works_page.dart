@@ -1,12 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vista/constants/app_colors.dart';
-import 'package:vista/pages/game_page.dart';
-import 'package:vista/pages/instant_match_page.dart';
 import 'package:vista/pages/live_singles_new_page.dart';
-import 'package:vista/pages/live_singles_page.dart';
 
 class HowItWorksPage extends ConsumerWidget {
   HowItWorksPage({super.key});

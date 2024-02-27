@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:vista/constants/app_colors.dart';
 import 'package:vista/models/profile.dart';
 import 'package:vista/pages/home_page.dart';
-import 'package:vista/services/firestore_service.dart';
+import 'package:vista/services/firebase_firestore_service.dart';
 
 class CreateProfilePage extends StatelessWidget {
   const CreateProfilePage({super.key});
@@ -131,7 +131,7 @@ class CreateProfilePage extends StatelessWidget {
                       );
                       // upload profile
                       try {
-                        await FirestoreService().uploadProfile(profile);
+                        await FirebaseFirestoreService().uploadProfile(profile);
                         // Upload successful
                         print('Profile uploaded successfully');
                         Navigator.of(context).push(

@@ -2,13 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:vista/constants/app_colors.dart';
-import 'package:vista/pages/create_profile_page.dart';
 import 'package:vista/pages/edit_profile_page.dart';
-import 'package:vista/pages/instant_match_page.dart';
 import 'package:vista/pages/how_it_works_page.dart';
 import 'package:vista/pages/preference_page.dart';
 import 'package:vista/pages/welcome_page.dart';
-import 'package:vista/services/authentication_service.dart';
+import 'package:vista/services/firebase_authentication_service.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -327,7 +325,7 @@ class HomePage extends StatelessWidget {
           ),
           CupertinoActionSheetAction(
             onPressed: () {
-              AuthenticationService().signOutUser().then((_) {
+              FirebaseAuthenticationService().signOutUser().then((_) {
                 // Sign out successful, handle any further logic here
                 Navigator.pop(context);
                 Navigator.of(context).push(

@@ -1,31 +1,38 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:vista/pages/create_profile_page.dart';
-import 'package:vista/services/authentication_service.dart';
+import 'package:vista/services/firebase_authentication_service.dart';
+import 'package:vista/widgets/error_cupertino_dialog.dart';
 
-class PhoneCodeAlert extends StatefulWidget {
+class SmsCodeEnterCupertinoDialog extends StatefulWidget {
   final String verificationID;
+  final String phoneNumberSent;
 
-  const PhoneCodeAlert({super.key, required this.verificationID});
+  const SmsCodeEnterCupertinoDialog(
+      {super.key, required this.verificationID, required this.phoneNumberSent});
 
   @override
-  _PhoneCodeAlertState createState() =>
-      _PhoneCodeAlertState(verificationID: verificationID);
+  _SmsCodeEnterCupertinoDialog createState() => _SmsCodeEnterCupertinoDialog(
+      verificationID: verificationID, phoneNumberSent: phoneNumberSent);
 }
 
-class _PhoneCodeAlertState extends State<PhoneCodeAlert> {
+class _SmsCodeEnterCupertinoDialog extends State<SmsCodeEnterCupertinoDialog> {
   final String verificationID;
+  final String phoneNumberSent;
   TextEditingController _textFieldController = TextEditingController();
 
-  _PhoneCodeAlertState({required this.verificationID});
+  _SmsCodeEnterCupertinoDialog(
+      {required this.verificationID, required this.phoneNumberSent});
 
   @override
   Widget build(BuildContext context) {
     return CupertinoAlertDialog(
-      title: Text('Code Sent To\n+1 875-987-2343\n'),
+      title: Text('Code Sent To\n$phoneNumberSent\n'),
       content: CupertinoTextField(
         controller: _textFieldController,
         placeholder: 'Enter 6 digit code',
         keyboardType: TextInputType.number,
+        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       ),
       actions: [
         CupertinoDialogAction(
@@ -41,7 +48,7 @@ class _PhoneCodeAlertState extends State<PhoneCodeAlert> {
             print('Submitted: $enteredText');
             //using a Future.then() .catchError() pattern to manage errors and success
             //creating credential and signing in "step 2"
-            AuthenticationService()
+            FirebaseAuthenticationService()
                 .createCredentialAndSignIn(
                     verificationID, _textFieldController.text)
                 .then((_) {
@@ -50,7 +57,7 @@ class _PhoneCodeAlertState extends State<PhoneCodeAlert> {
               Navigator.of(context).push(
                 CupertinoPageRoute(
                   fullscreenDialog: false,
-                  builder: (context) => CreateProfilePage(),
+                  builder: (context) => const CreateProfilePage(),
                 ),
               );
             }).catchError((error) {
@@ -59,18 +66,7 @@ class _PhoneCodeAlertState extends State<PhoneCodeAlert> {
               showCupertinoDialog(
                 context: context,
                 builder: (context) {
-                  return CupertinoAlertDialog(
-                    title: Text('Oops'),
-                    content: Text(error),
-                    actions: [
-                      CupertinoDialogAction(
-                        child: Text('OK'),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  );
+                  return ErrorCupertinoDialog(error: error.toString());
                 },
               );
             });

@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vista/constants/app_colors.dart';
 import 'package:vista/enum/game_bottom_view_enum.dart';
 import 'package:vista/pages/game_page.dart';
-import 'package:vista/pages/how_it_works_page.dart';
 
 class InstantMatchPage extends StatelessWidget {
   const InstantMatchPage({super.key});

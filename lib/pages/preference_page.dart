@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:vista/constants/app_colors.dart';
 
 class PreferencePage extends StatelessWidget {
   const PreferencePage({super.key});
