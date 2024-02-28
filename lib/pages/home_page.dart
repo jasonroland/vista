@@ -6,7 +6,7 @@ import 'package:vista/pages/edit_profile_page.dart';
 import 'package:vista/pages/how_it_works_page.dart';
 import 'package:vista/pages/preference_page.dart';
 import 'package:vista/pages/welcome_page.dart';
-import 'package:vista/services/firebase_authentication_service.dart';
+import 'package:vista/services/login_service.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -325,36 +325,7 @@ class HomePage extends StatelessWidget {
           ),
           CupertinoActionSheetAction(
             onPressed: () {
-              FirebaseAuthenticationService().signOutUser().then((_) {
-                // Sign out successful, handle any further logic here
-                Navigator.pop(context);
-                Navigator.of(context).push(
-                  CupertinoPageRoute(
-                    fullscreenDialog:
-                        false, //not sure which way i want the transitions
-                    builder: (context) => WelcomePage(),
-                  ),
-                );
-              }).catchError((error) {
-                // Sign out failed, handle the error here
-                showCupertinoDialog(
-                  context: context,
-                  builder: (context) {
-                    return CupertinoAlertDialog(
-                      title: Text('Oops'),
-                      content: Text(error),
-                      actions: [
-                        CupertinoDialogAction(
-                          child: Text('OK'),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      ],
-                    );
-                  },
-                );
-              });
+              LoginService().signUserOut(context: context);
             },
             child: const Text('Sign Out'),
           ),

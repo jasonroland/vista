@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:vista/constants/app_colors.dart';
 import 'package:vista/models/profile.dart';
 import 'package:vista/pages/home_page.dart';
@@ -9,6 +12,15 @@ class CreateProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController nameTextEditingController = TextEditingController();
+    TextEditingController ageTextEditingController = TextEditingController();
+    TextEditingController instagramTextEditingController =
+        TextEditingController();
+    TextEditingController jobOrSchoolTextEditingController =
+        TextEditingController();
+    String gender = "Male";
+    String profileImageLink = "https://example.com/profile.jpg";
+
     return PopScope(
       canPop: false,
       child: CupertinoPageScaffold(
@@ -62,20 +74,16 @@ class CreateProfilePage extends StatelessWidget {
                       title: Text("Name"),
                       trailing: Expanded(
                         child: CupertinoTextField.borderless(
-                          placeholder: "First Name, Last Name",
-                          // controller:
-                          //     TextEditingController(text: "First Name"),
-                        ),
+                            placeholder: "First Name, Last Name",
+                            controller: nameTextEditingController),
                       ),
                     ),
                     CupertinoListTile(
                       title: Text("Job/School"),
                       trailing: Expanded(
                         child: CupertinoTextField.borderless(
-                          placeholder: "Harvard 2023",
-                          // controller:
-                          //     TextEditingController(text: "First Name"),
-                        ),
+                            placeholder: "Harvard 2023",
+                            controller: jobOrSchoolTextEditingController),
                       ),
                     ),
                     CupertinoListTile(
@@ -83,8 +91,11 @@ class CreateProfilePage extends StatelessWidget {
                       trailing: Expanded(
                         child: CupertinoTextField.borderless(
                           placeholder: "27",
-                          // controller:
-                          //     TextEditingController(text: "First Name"),
+                          controller: ageTextEditingController,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
                         ),
                       ),
                     ),
@@ -93,8 +104,7 @@ class CreateProfilePage extends StatelessWidget {
                       trailing: Expanded(
                         child: CupertinoTextField.borderless(
                           placeholder: "@Yogibear",
-                          // controller:
-                          //     TextEditingController(text: "First Name"),
+                          controller: instagramTextEditingController,
                         ),
                       ),
                     ),
@@ -107,8 +117,9 @@ class CreateProfilePage extends StatelessWidget {
                         },
 
                         groupValue: 1,
-                        onValueChanged:
-                            (int? value) {}, // Set the default selected index
+                        onValueChanged: (int? value) {
+                          gender = value == 0 ? "Male" : "Female";
+                        }, // Set the default selected index
                       ),
                     ),
                   ],
@@ -122,12 +133,12 @@ class CreateProfilePage extends StatelessWidget {
                     onPressed: () async {
                       //creating profile
                       Profile profile = Profile(
-                        name: 'John Do',
-                        jobOrSchool: 'Software Engineer',
-                        age: 30,
-                        instagram: '@johndo',
-                        gender: 'Male',
-                        profileImageLink: 'https://example.com/profile.jpg',
+                        name: nameTextEditingController.text,
+                        jobOrSchool: jobOrSchoolTextEditingController.text,
+                        age: int.parse(ageTextEditingController.text),
+                        instagram: instagramTextEditingController.text,
+                        gender: gender,
+                        profileImageLink: profileImageLink,
                       );
                       // upload profile
                       try {

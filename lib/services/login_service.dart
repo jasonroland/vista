@@ -1,13 +1,16 @@
 import 'package:flutter/cupertino.dart';
+import 'package:vista/pages/create_profile_page.dart';
+import 'package:vista/pages/welcome_page.dart';
 import 'package:vista/services/firebase_authentication_service.dart';
 import 'package:vista/widgets/error_cupertino_dialog.dart';
 import 'package:vista/widgets/sms_code_enter_cupertino_dialog.dart';
 
-//this class is called from the welcome page ui signs user in (using the FirebaseAuthenticationService) and shows dialog if there are errors
+//this class signs user in (using the FirebaseAuthenticationService) and shows dialog if there are errors
 class LoginService {
-  void startLoginProcess(BuildContext context, String phoneNumberToSend) {
-    FirebaseAuthenticationService authService = FirebaseAuthenticationService();
-
+  FirebaseAuthenticationService authService = FirebaseAuthenticationService();
+//shows cupertio dialog if failed
+  void startLoginProcess(
+      {required BuildContext context, required String phoneNumberToSend}) {
     if (phoneNumberToSend.length < 10) {
       showCupertinoDialog(
         context: context,
@@ -37,5 +40,53 @@ class LoginService {
         );
       });
     }
+  }
+
+//shows cupertio dialog if logingin failed
+  void finishLoginProcess({
+    required BuildContext context,
+    required String verificationID,
+    required String smsCode,
+  }) {
+    // FirebaseAuthenticationService()
+    authService.createCredentialAndSignIn(verificationID, smsCode).then((_) {
+      // If sign-in is successful, navigate to the next page
+      Navigator.of(context).pop();
+      Navigator.of(context).push(
+        //TODO: if user already has a profile, when sign in take him to the home page (can use a ternary operator)
+        CupertinoPageRoute(
+          fullscreenDialog: false,
+          builder: (context) => const CreateProfilePage(),
+        ),
+      );
+    }).catchError((error) {
+      // If there's an error during sign-in, handle it here
+      print('Error during verification: $error');
+      showCupertinoDialog(
+        context: context,
+        builder: (context) {
+          return ErrorCupertinoDialog(error: error.toString());
+        },
+      );
+    });
+  }
+
+//shows cupertio dialog if signout failed
+  void signUserOut({required BuildContext context}) {
+    authService
+        .signOutUser()
+        .then((_) => Navigator.of(context).push(
+              CupertinoPageRoute(
+                fullscreenDialog:
+                    false, //not sure which way i want the transitions
+                builder: (context) => WelcomePage(),
+              ),
+            ))
+        .catchError((error) => showCupertinoDialog(
+              context: context,
+              builder: (context) {
+                return ErrorCupertinoDialog(error: error.toString());
+              },
+            ));
   }
 }

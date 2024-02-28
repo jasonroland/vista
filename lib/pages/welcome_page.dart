@@ -110,10 +110,11 @@ class WelcomePage extends StatelessWidget {
                               (countryCodeTextEditingController.text +
                                   phoneNumberTextEditingController.text);
 
-                          LoginService loginCode = LoginService();
+                          LoginService loginService = LoginService();
                           // Call getStarted method with the BuildContext and phone number
-                          loginCode.startLoginProcess(
-                              context, phoneNumberToSend);
+                          loginService.startLoginProcess(
+                              context: context,
+                              phoneNumberToSend: phoneNumberToSend);
                         },
                       ),
                       const SizedBox(height: 16),
