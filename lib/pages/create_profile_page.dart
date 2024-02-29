@@ -1,11 +1,10 @@
-import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:vista/constants/app_colors.dart';
 import 'package:vista/models/profile.dart';
 import 'package:vista/pages/home_page.dart';
 import 'package:vista/services/firebase_firestore_service.dart';
+import 'package:vista/widgets/error_cupertino_dialog.dart';
 
 class CreateProfilePage extends StatelessWidget {
   const CreateProfilePage({super.key});
@@ -33,8 +32,8 @@ class CreateProfilePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: 32),
-                Align(
+                const SizedBox(height: 32),
+                const Align(
                   alignment: Alignment.topLeft,
                   child: Padding(
                     padding: EdgeInsets.only(left: 20),
@@ -45,7 +44,7 @@ class CreateProfilePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 32),
+                const SizedBox(height: 32),
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
@@ -55,7 +54,7 @@ class CreateProfilePage extends StatelessWidget {
                   height: 240,
                   child: Center(
                     child: CupertinoButton(
-                        child: Text("Choose Image"), onPressed: () {}),
+                        child: const Text("Choose Image"), onPressed: () {}),
                   ),
                 ),
                 // ClipRRect(
@@ -67,11 +66,11 @@ class CreateProfilePage extends StatelessWidget {
                 //     fit: BoxFit.cover,
                 //   ),
                 // ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 CupertinoListSection.insetGrouped(
                   children: <CupertinoListTile>[
                     CupertinoListTile(
-                      title: Text("Name"),
+                      title: const Text("Name"),
                       trailing: Expanded(
                         child: CupertinoTextField.borderless(
                             placeholder: "First Name, Last Name",
@@ -79,7 +78,7 @@ class CreateProfilePage extends StatelessWidget {
                       ),
                     ),
                     CupertinoListTile(
-                      title: Text("Job/School"),
+                      title: const Text("Job/School"),
                       trailing: Expanded(
                         child: CupertinoTextField.borderless(
                             placeholder: "Harvard 2023",
@@ -87,7 +86,7 @@ class CreateProfilePage extends StatelessWidget {
                       ),
                     ),
                     CupertinoListTile(
-                      title: Text("Age"),
+                      title: const Text("Age"),
                       trailing: Expanded(
                         child: CupertinoTextField.borderless(
                           placeholder: "27",
@@ -100,7 +99,7 @@ class CreateProfilePage extends StatelessWidget {
                       ),
                     ),
                     CupertinoListTile(
-                      title: Text("Instagram"),
+                      title: const Text("Instagram"),
                       trailing: Expanded(
                         child: CupertinoTextField.borderless(
                           placeholder: "@Yogibear",
@@ -109,9 +108,9 @@ class CreateProfilePage extends StatelessWidget {
                       ),
                     ),
                     CupertinoListTile(
-                      title: Text("Sex"),
+                      title: const Text("Sex"),
                       trailing: CupertinoSlidingSegmentedControl<int>(
-                        children: {
+                        children: const {
                           0: Text('Male'),
                           1: Text('Female'),
                         },
@@ -124,9 +123,9 @@ class CreateProfilePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 CupertinoButton.filled(
-                    child: Text(
+                    child: const Text(
                       "Save",
                       style: TextStyle(fontWeight: FontWeight.w500),
                     ),
@@ -141,20 +140,26 @@ class CreateProfilePage extends StatelessWidget {
                         profileImageLink: profileImageLink,
                       );
                       // upload profile
-                      try {
-                        await FirebaseFirestoreService().uploadProfile(profile);
-                        // Upload successful
-                        print('Profile uploaded successfully');
-                        Navigator.of(context).push(
-                          CupertinoPageRoute(
-                            fullscreenDialog: false,
-                            builder: (context) => HomePage(),
-                          ),
-                        );
-                      } catch (error) {
-                        // Error occurred during upload
-                        print('Error uploading profile: $error');
-                      }
+
+                      await FirebaseFirestoreService()
+                          .uploadProfile(profile)
+                          // Upload successful
+                          // print('Profile uploaded successfully');
+                          .then((value) => Navigator.of(context).push(
+                                CupertinoPageRoute(
+                                  fullscreenDialog: false,
+                                  builder: (context) => const HomePage(),
+                                ),
+                              ))
+                          .catchError((error) =>
+                              // Error occurred during upload
+                              showCupertinoDialog(
+                                context: context,
+                                builder: (context) {
+                                  return ErrorCupertinoDialog(
+                                      error: error.toString());
+                                },
+                              ));
                     })
               ],
             ),

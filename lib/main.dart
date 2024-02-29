@@ -1,12 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vista/constants/app_colors.dart';
 import 'package:vista/firebase_options.dart';
 import 'package:vista/pages/home_page.dart';
-import 'package:flutter/services.dart';
 import 'package:vista/pages/welcome_page.dart';
 
 Future<void> main() async {
@@ -14,7 +12,8 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(ProviderScope(child: MyApp()));
+  //this const might mess things up?
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -25,7 +24,7 @@ class MyApp extends StatelessWidget {
     FirebaseAuth auth = FirebaseAuth.instance;
     return CupertinoApp(
         // title: 'Flutter Demo',
-        theme: CupertinoThemeData(
+        theme: const CupertinoThemeData(
             primaryColor: AppColors.yellowButtonColor, //greeenbuttoncolor
             brightness: Brightness.dark
             // primaryContrastingColor: Colors.green,
@@ -39,6 +38,7 @@ class MyApp extends StatelessWidget {
 //TODO: if user signs in for the first time but doesnt create his account and closes app
 //and signs back in app will take him to home page, need code to check if account is
 //set up and if not take him to create profile page.
-        home: auth.currentUser != null ? HomePage() : WelcomePage());
+        home:
+            auth.currentUser != null ? const HomePage() : const WelcomePage());
   }
 }

@@ -5,7 +5,6 @@ import 'package:vista/constants/app_colors.dart';
 import 'package:vista/pages/edit_profile_page.dart';
 import 'package:vista/pages/how_it_works_page.dart';
 import 'package:vista/pages/preference_page.dart';
-import 'package:vista/pages/welcome_page.dart';
 import 'package:vista/services/login_service.dart';
 
 class HomePage extends StatelessWidget {
@@ -21,7 +20,7 @@ class HomePage extends StatelessWidget {
             child: CustomScrollView(
               slivers: <Widget>[
                 CupertinoSliverNavigationBar(
-                    largeTitle: Text("My Profile"),
+                    largeTitle: const Text("My Profile"),
                     automaticallyImplyLeading: false,
                     trailing: IconButton(
                       padding: const EdgeInsets.all(0),
@@ -206,7 +205,7 @@ class HomePage extends StatelessWidget {
                     },
                     color: AppColors.blackTextColor,
                     shape: RoundedRectangleBorder(
-                        side: BorderSide(
+                        side: const BorderSide(
                             color: AppColors.darkGreyTextColor, width: 1),
                         borderRadius: BorderRadius.circular(8)),
                     child: const Column(children: [
@@ -271,19 +270,6 @@ class HomePage extends StatelessWidget {
         ),
         //  message: const Text('Edit Profile'),
         actions: <CupertinoActionSheetAction>[
-          // CupertinoActionSheetAction(
-          //   onPressed: () {
-          //     Navigator.pop(context);
-          //     Navigator.of(context).push(
-          //       CupertinoPageRoute(
-          //         fullscreenDialog:
-          //             false, //not sure which way i want the transitions
-          //         builder: (context) => CreateProfilePage(),
-          //       ),
-          //     );
-          //   },
-          //   child: const Text('Create Profile'),
-          // ),
           CupertinoActionSheetAction(
             onPressed: () {
               Navigator.pop(context);
@@ -291,7 +277,7 @@ class HomePage extends StatelessWidget {
                 CupertinoPageRoute(
                   fullscreenDialog:
                       false, //not sure which way i want the transitions
-                  builder: (context) => EditProfilePage(),
+                  builder: (context) => const EditProfilePage(),
                 ),
               );
             },
@@ -304,24 +290,11 @@ class HomePage extends StatelessWidget {
                 CupertinoPageRoute(
                   fullscreenDialog:
                       false, //not sure which way i want the transitions
-                  builder: (context) => PreferencePage(),
+                  builder: (context) => const PreferencePage(),
                 ),
               );
             },
             child: const Text('Preferences'),
-          ),
-          CupertinoActionSheetAction(
-            onPressed: () {
-              Navigator.pop(context);
-              Navigator.of(context).push(
-                CupertinoPageRoute(
-                  fullscreenDialog:
-                      false, //not sure which way i want the transitions
-                  builder: (context) => WelcomePage(),
-                ),
-              );
-            },
-            child: const Text('welcome'),
           ),
           CupertinoActionSheetAction(
             onPressed: () {

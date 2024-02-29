@@ -8,11 +8,11 @@ class ErrorCupertinoDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoAlertDialog(
-      title: Text("Oops"),
+      title: const Text("Oops"),
       content: Text(error),
       actions: [
         CupertinoDialogAction(
-          child: Text('OK'),
+          child: const Text('OK'),
           onPressed: () {
             Navigator.of(context).pop();
           },

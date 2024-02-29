@@ -106,7 +106,7 @@ class GamePage extends ConsumerWidget {
                                           Navigator.of(context).push(
                                               CupertinoPageRoute(
                                                   builder: (context) =>
-                                                      GameOverPage()));
+                                                      const GameOverPage()));
                                           // ref
                                           //         .read(gameBottomViewController
                                           //             .notifier)

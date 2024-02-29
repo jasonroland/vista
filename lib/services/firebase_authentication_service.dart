@@ -71,7 +71,8 @@ class FirebaseAuthenticationService {
       print('User signed out successfully');
     } catch (error) {
       print('Error signing out: $error');
-      throw error; // Re-throw the error to propagate it to the caller
+      // throw error;
+      rethrow; // Re-throw the error to propagate it to the caller
     }
   }
 }

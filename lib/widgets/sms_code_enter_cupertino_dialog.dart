@@ -17,7 +17,7 @@ class SmsCodeEnterCupertinoDialog extends StatelessWidget {
 //function to handle the submition when user enters the code.
   void handleSubmit(BuildContext context) {
     String enteredText = _textFieldController.text;
-    print('Submitted: $enteredText');
+    // print('Submitted: $enteredText');
     // Creating credential and signing in "step 2"
     LoginService().finishLoginProcess(
       context: context,
@@ -41,14 +41,14 @@ class SmsCodeEnterCupertinoDialog extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).pop(); // Close the dialog
           },
-          child: Text('Go Back'),
+          child: const Text('Go Back'),
         ),
         CupertinoDialogAction(
           onPressed: () {
             handleSubmit(context);
           },
           isDefaultAction: true,
-          child: Text('Submit'),
+          child: const Text('Submit'),
         ),
       ],
     );
