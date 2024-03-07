@@ -79,13 +79,13 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
 
         return Consumer(
           builder: (context, ref, child) {
-            return Container(
+            return SizedBox(
                 width: screenWidth,
                 height: screenWidth,
                 child: Stack(
                   children: [
                     Positioned.fill(
-                      child: Container(
+                      child: SizedBox(
                         width: screenWidth,
                         height: screenWidth,
                         child: AspectRatio(
@@ -108,7 +108,7 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
                       child: Align(
                         alignment: Alignment.bottomCenter,
                         child: IconButton(
-                          padding: EdgeInsets.all(16),
+                          padding: const EdgeInsets.all(16),
                           icon: const Icon(
                             CupertinoIcons.camera,
                             color: AppColors.whiteNintyPercentTransparent,

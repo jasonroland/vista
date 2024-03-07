@@ -27,29 +27,19 @@ class HowItWorksPage extends ConsumerWidget {
                       padding: EdgeInsets.only(left: 16, right: 16),
                       child: Align(
                         alignment: Alignment.topLeft,
-                        // child: Text(
-                        //   "How it works",
-                        //   style: TextStyle(
-                        //       fontWeight: FontWeight.bold, fontSize: 32),
-                        // ),
                       ),
                     ),
                     const SizedBox(
                       height: 24,
                     ),
                     Padding(
-                      padding: EdgeInsets.all(
+                      padding: const EdgeInsets.all(
                           0), //EdgeInsets.only(left: 16, right: 16),
                       child: Center(
-                        //child: Padding(
-                        // padding: EdgeInsets.all(
-                        //      0), //EdgeInsets.only(left: 20, right: 20),
                         child: Column(
                           children: [
                             Container(
                               decoration: BoxDecoration(
-                                  // color:
-                                  //  CupertinoTheme.of(context).barBackgroundColor,
                                   borderRadius: BorderRadius.circular(8)),
                               child: const Padding(
                                 padding: EdgeInsets.only(left: 20, right: 20),
@@ -87,11 +77,9 @@ class HowItWorksPage extends ConsumerWidget {
                                         ),
                                       ),
                                     ]),
-
                                     SizedBox(
                                       height: 24,
                                     ),
-
                                     Row(
                                       children: [
                                         Icon(CupertinoIcons.camera_circle_fill),
@@ -162,11 +150,9 @@ class HowItWorksPage extends ConsumerWidget {
                                         ),
                                       ],
                                     ),
-
                                     SizedBox(
                                       height: 24,
                                     ),
-
                                     // SizedBox(
                                     //   height: 24,
                                     // ),
@@ -203,10 +189,7 @@ class HowItWorksPage extends ConsumerWidget {
                 ),
               ),
               CupertinoListSection.insetGrouped(
-                margin: EdgeInsets.all(16),
-                // decoration: BoxDecoration(
-                // borderRadius: BorderRadius.circular(8),
-                // color: CupertinoTheme.of(context).barBackgroundColor),
+                margin: const EdgeInsets.all(16),
                 children: <CupertinoListTile>[
                   CupertinoListTile(
                     leading: Icon(
@@ -225,26 +208,14 @@ class HowItWorksPage extends ConsumerWidget {
                           showCupertinoModalPopup<void>(
                             context: context,
                             builder: (BuildContext context) {
-                              // Future.delayed(Duration(seconds: 1), () {
-                              //   Navigator.of(context).push(
-                              //     CupertinoPageRoute(
-                              //       fullscreenDialog: true,
-                              //       builder: (context) => LiveSinglesNewPage(),
-                              //     ),
-                              //   );
-                              // });
-
                               return CupertinoPopupSurface(
-                                // height: 200,
-                                // color: Colors.amber,
-                                child: Container(
-                                  // height: 200,
+                                child: SizedBox(
                                   width: double.infinity,
                                   child: Padding(
-                                    padding: EdgeInsets.all(0),
+                                    padding: const EdgeInsets.all(0),
                                     child: Padding(
-                                      padding:
-                                          EdgeInsets.only(bottom: 32, top: 16),
+                                      padding: const EdgeInsets.only(
+                                          bottom: 32, top: 16),
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -266,7 +237,7 @@ class HowItWorksPage extends ConsumerWidget {
                                           //   onPressed: () => Navigator.pop(context),
                                           // ),
 
-                                          Text(
+                                          const Text(
                                             "You are now live",
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w700,
@@ -274,38 +245,11 @@ class HowItWorksPage extends ConsumerWidget {
                                                 color:
                                                     AppColors.whiteTextColor),
                                           ),
-                                          SizedBox(height: 16),
-                                          // SizedBox(
-                                          //   height: 16,
-                                          // ),
-                                          // Row(
-                                          //   mainAxisAlignment:
-                                          //       MainAxisAlignment.center,
-                                          //   children: [
-                                          //     // Text(
-                                          //     //   "30 potential matches",
-                                          //     //   textAlign: TextAlign.left,
-                                          //     //   style: TextStyle(
-                                          //     //       fontWeight: FontWeight.w500,
-                                          //     //       fontSize: 16,
-                                          //     //       color:
-                                          //     //           AppColors.greyTextColor),
-                                          //     // ),
-                                          //     // Text(
-                                          //     //   "Searching for live singles",
-                                          //     //   style: TextStyle(
-                                          //     //       fontWeight: FontWeight.w700,
-                                          //     //       fontSize: 20,
-                                          //     //       color:
-                                          //     //           AppColors.whiteTextColor),
-                                          //     // ),
-                                          //     //   SizedBox(width: 8),
-                                          //   ],
-                                          // ),
-                                          // SizedBox(height: 28),
+                                          const SizedBox(height: 16),
+
                                           CupertinoButton.filled(
                                               //   padding: EdgeInsets.all(16),
-                                              child: Column(
+                                              child: const Column(
                                                 children: [
                                                   Icon(CupertinoIcons.globe),
                                                   SizedBox(height: 4),
@@ -317,20 +261,9 @@ class HowItWorksPage extends ConsumerWidget {
                                                     CupertinoPageRoute(
                                                       fullscreenDialog: true,
                                                       builder: (context) =>
-                                                          LiveSinglesNewPage(),
+                                                          const LiveSinglesNewPage(),
                                                     ),
                                                   )),
-
-                                          // Expanded(
-                                          //   child: Text(
-                                          //     "Game ends after 10 prompts or 3 minutes whichever comes first",
-                                          //     textAlign: TextAlign.left,
-                                          //     style: TextStyle(
-                                          //         fontWeight: FontWeight.w500,
-                                          //         fontSize: 16,
-                                          //         color: AppColors.greyTextColor),
-                                          //   ),
-                                          // ),
                                         ],
                                       ),
                                     ),
@@ -339,12 +272,6 @@ class HowItWorksPage extends ConsumerWidget {
                               );
                             },
                           );
-                          // Navigator.of(context).push(
-                          //   CupertinoPageRoute(
-                          //     fullscreenDialog: true,
-                          //     builder: (context) => LiveSinglesNewPage(),
-                          //   ),
-                          // );
                         }),
                     onTap: () {
                       // ref.read(availableToMatchSwitchProvider.notifier).state =

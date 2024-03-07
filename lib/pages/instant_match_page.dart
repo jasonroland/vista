@@ -85,8 +85,8 @@ class InstantMatchPage extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Expanded(
-                                    child: const Column(
+                                  const Expanded(
+                                    child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
@@ -119,18 +119,20 @@ class InstantMatchPage extends StatelessWidget {
                                     onPressed: () {
                                       HapticFeedback.mediumImpact();
 
-                                      Navigator.of(context).push(
-                                        CupertinoPageRoute(
-                                          fullscreenDialog: true,
-                                          builder: (context) => GamePage(),
-                                        ),
-                                      );
-                                      //we are making sure state is going to show the explain view, this is why we wrapped this enire thing in a consumer widget to give us access to ref
                                       ref
                                               .read(gameBottomViewController
                                                   .notifier)
                                               .state =
                                           GameViewBottomViewEnum.explain;
+
+                                      Navigator.of(context).push(
+                                        CupertinoPageRoute(
+                                          fullscreenDialog: true,
+                                          builder: (context) =>
+                                              const GamePage(),
+                                        ),
+                                      );
+                                      //we are making sure state is going to show the explain view, this is why we wrapped this enire thing in a consumer widget to give us access to ref
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor:
@@ -139,11 +141,11 @@ class InstantMatchPage extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(
                                             50.0), // Half of the button height makes it an oval shape
                                       ),
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal:
                                               20.0), // Adjust the padding as needed
                                     ),
-                                    child: Row(
+                                    child: const Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         SizedBox(width: 4),
