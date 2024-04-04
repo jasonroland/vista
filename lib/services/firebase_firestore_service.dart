@@ -31,4 +31,6 @@ class FirebaseFirestoreService {
       print('Error uploading profile: $e');
     }
   }
+
+  //Method to stream current live users from firebase
 }

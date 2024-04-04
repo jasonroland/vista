@@ -43,8 +43,10 @@ dependencies:
   appinio_swiper:
   action_slider:
   firebase_core:
+  firebase_storage:
   cloud_firestore:
   firebase_auth:
+  image_picker:
   
 
 

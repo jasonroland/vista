@@ -1,9 +1,13 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:vista/constants/app_colors.dart';
 import 'package:vista/models/profile.dart';
 import 'package:vista/pages/home_page.dart';
 import 'package:vista/services/firebase_firestore_service.dart';
+import 'package:vista/services/firebase_storage_service.dart';
+import 'package:vista/services/pick_image_service.dart';
 import 'package:vista/widgets/error_cupertino_dialog.dart';
 
 class CreateProfilePage extends StatelessWidget {
@@ -54,7 +58,26 @@ class CreateProfilePage extends StatelessWidget {
                   height: 240,
                   child: Center(
                     child: CupertinoButton(
-                        child: const Text("Choose Image"), onPressed: () {}),
+                        child: const Text("Choose Image"),
+                        onPressed: () {
+                          PickImageService().pickImage().then((imagePath) {
+                            print(imagePath);
+                            FirebaseStorageService().uploadProfilePicture(
+                              filePath: imagePath,
+                              onProgress: (progress) {
+                                // TODO: Update UI with the upload progress
+                                print(
+                                    'Upload progress: ${(progress * 100).toStringAsFixed(2)}%');
+                              },
+                            );
+                          }) //print(imagePath))
+                              //TODO: show image yay state managment
+
+                              .catchError((error) {
+                            print(error.toString());
+                            //TODO: handle error
+                          });
+                        }),
                   ),
                 ),
                 // ClipRRect(

@@ -47,6 +47,8 @@
 	<string>need mic</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>In order to choose profile photo and take pics</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
